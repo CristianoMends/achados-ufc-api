@@ -5,9 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Item } from './entities/item.entity';
 import { User } from 'src/users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { UploadModule } from 'src/upload/upload.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Item, User]),
+    UploadModule,
     ConfigModule,
   ],
   controllers: [ItemsController],

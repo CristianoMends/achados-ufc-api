@@ -15,6 +15,7 @@ import { writeFile, mkdir, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { User } from 'src/users/entities/user.entity';
 import { ViewItemDto } from './dto/view-item.dto';
+import { UploadService } from 'src/upload/upload.service';
 
 @Injectable()
 export class ItemService {
@@ -24,6 +25,7 @@ export class ItemService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private configService: ConfigService,
+    private uploadService: UploadService
   ) { }
 
   async create(createItemDto: CreateItemDto, image: Express.Multer.File, userId: number) {
@@ -50,27 +52,33 @@ export class ItemService {
     const strategy = this.configService.get<string>('UPLOAD_STRATEGY');
     const item = this.itemRepository.create(createItemDto);
 
-    if (strategy === 'vercel') {
-      const blob = await put(`items/image.png`, image.buffer, {
-        access: 'public',
-        addRandomSuffix: true,
-      });
-      item.imageUrl = blob.url;
-    } else {
-      const folderPath = join(__dirname, '..', '..', 'uploads', 'items');
-      if (!existsSync(folderPath)) {
-        await mkdir(folderPath, { recursive: true });
-      }
-
-      const fileName = `image-${Date.now()}.png`;
-      const filePath = join(folderPath, fileName);
-      await writeFile(filePath, image.buffer);
-
-      item.imageUrl = `http://localhost:3000/uploads/items/${fileName}`;
-    }
+    item.imageUrl = await this.uploadService.upload(image)
+    /*
+        if (strategy === 'vercel') {
+          const blob = await put(`items/image.png`, image.buffer, {
+            access: 'public',
+            addRandomSuffix: true,
+          });
+          item.imageUrl = blob.url;
+        } else {
+          const folderPath = join(__dirname, '..', '..', 'uploads', 'items');
+          if (!existsSync(folderPath)) {
+            await mkdir(folderPath, { recursive: true });
+          }
+    
+          const fileName = `image-${Date.now()}.png`;
+          const filePath = join(folderPath, fileName);
+          await writeFile(filePath, image.buffer);
+    
+          item.imageUrl = `http://localhost:3000/uploads/items/${fileName}`;
+        }
+    
+        */
 
     item.user = user;
     item.date = new Date().toISOString(); // Pode ser omitido se usar @CreateDateColumn
+
+
 
     return this.itemRepository.save(item);
   }
