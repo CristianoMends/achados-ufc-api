@@ -19,6 +19,7 @@ export class Item {
   @Column()
   location: String;
 
+  @Column()
   date: String;
 
   @Column({ default: false })
