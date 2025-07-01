@@ -76,12 +76,6 @@ export class ItemService {
         */
 
     item.user = user;
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-    item.date = `${day}/${month}/${year}`;
-
     return this.itemRepository.save(item);
   }
 
