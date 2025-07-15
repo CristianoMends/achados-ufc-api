@@ -108,4 +108,16 @@ export class ItemService {
 
     await this.itemRepository.remove(item);
   }
+  async findOneById(id: number): Promise<ViewItemDto | null> {
+
+    const res = await this.itemRepository.findOne({ where: { id } });
+
+    if (res) {
+      return new ViewItemDto(res);
+
+    }
+
+    return null
+
+  }
 }

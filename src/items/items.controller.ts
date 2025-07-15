@@ -41,6 +41,11 @@ export class ItemsController {
     return await this.itemsService.create(createItemDto, file, userId);
   }
 
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.itemsService.findOneById(id);
+  }
+
   @Get()
   findAll() {
     return this.itemsService.findAll();
