@@ -8,6 +8,7 @@ import { ItemsModule } from './items/items.module';
 import * as dotenv from 'dotenv';
 import { ConfigModule } from '@nestjs/config';
 import { UploadModule } from './upload/upload.module';
+import { ChatModule } from './chat/chat.module';
 
 dotenv.config();
 const isProd = process.env.NODE_ENV === 'production';
@@ -33,6 +34,7 @@ const isProd = process.env.NODE_ENV === 'production';
     }),
     ItemsModule,
     UploadModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
