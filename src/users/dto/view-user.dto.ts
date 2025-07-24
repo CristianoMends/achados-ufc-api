@@ -3,7 +3,7 @@ import { User } from "../entities/user.entity";
 
 export class ViewUserDto {
     id: number;
-    username: String;
+    username: String | null;
     email: String;
 
     @IsString()
@@ -21,6 +21,8 @@ export class ViewUserDto {
     @IsString()
     surname: string | null;
 
+    fcmToken: string | null;
+
     constructor(user: User) {
         this.id = user.id;
         this.username = user.username;
@@ -29,5 +31,6 @@ export class ViewUserDto {
         this.phone = user.phone;
         this.imageUrl = user.imageUrl;
         this.surname = user.surname;
+        this.fcmToken = user.fcmToken;
     }
 }

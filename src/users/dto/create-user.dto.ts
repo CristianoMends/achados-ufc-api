@@ -1,5 +1,5 @@
 export class CreateUserDto {
-    username: String;
+    username: String | null;
     email: String;
     password: String;
     name: string;

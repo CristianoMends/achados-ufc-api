@@ -3,14 +3,17 @@ import { Item } from 'src/items/entities/item.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 @Entity()
-@Unique(['username'])
+@Unique(['email'])
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    username: String;
+    @Column({type: 'varchar', nullable: true })
+    username: String | null;
 
+    @Column({ type: 'varchar', nullable: true })
+    fcmToken: string | null;
+    
     @Column()
     email: String;
 
