@@ -1,98 +1,115 @@
+# Achados e Perdidos - UFC API
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progresive  <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  API RESTful desenvolvida com <strong>NestJS</strong> para um sistema de "Achados e Perdidos" na Universidade Federal do Ceará (UFC).
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p align="center">
+    <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS"/>
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+    <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
+    <img src="https://img.shields.io/badge/TypeORM-E8225A?style=for-the-badge" alt="TypeORM"/>
+    <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT"/>
+    <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"/>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🎯 Sobre o Projeto
+
+A **Achados e Perdidos - UFC API** é o backend de um sistema projetado para ajudar a comunidade acadêmica a encontrar e devolver itens perdidos dentro do campus. A aplicação permite que usuários se cadastrem, publiquem itens que encontraram e pesquisem por itens que perderam.
+
+O projeto foi construído utilizando as melhores práticas de desenvolvimento, com uma arquitetura modular e escalável, pronta para ser consumida por qualquer cliente (web ou mobile).
+
+## ✨ Principais Funcionalidades
+
+* **Autenticação de Usuários**:
+    * Cadastro de novos usuários com e-mail e senha (com hash de senha usando `bcrypt`).
+    * Login tradicional (e-mail e senha).
+    * Login social integrado com o **Google**, utilizando `google-auth-library`.
+    * Proteção de rotas com **JWT (JSON Web Tokens)**.
+* **Gerenciamento de Itens**:
+    * `POST /items`: Criação de um novo item (achado ou perdido) com upload de imagem.
+    * `GET /items`: Listagem de todos os itens cadastrados, ordenados por data.
+    * `GET /items/:id`: Busca de um item específico pelo seu ID.
+    * `DELETE /items/:id`: Remoção de um item (requer autenticação).
+* **Gerenciamento de Usuários**:
+    * `GET /users`: Lista todos os usuários.
+    * `GET /users/search`: Busca um usuário pelo e-mail.
+    * `GET /users/:username`: Busca um usuário pelo seu nome de usuário.
+* **Upload de Arquivos**:
+    * Sistema flexível de upload de imagens com suporte a diferentes estratégias (local ou Vercel Blob Storage).
+    * Validação de tipo de arquivo (apenas imagens) e tamanho (máximo de 3MB).
+
+## 🚀 Tecnologias Utilizadas
+
+Este projeto foi construído com as seguintes tecnologias:
+
+* **Backend**:
+    * **[NestJS](https://nestjs.com/)**: Um framework Node.js progressivo para construir aplicações eficientes e escaláveis.
+    * **[TypeScript](https://www.typescriptlang.org/)**: Superset do JavaScript que adiciona tipagem estática.
+* **Banco de Dados**:
+    * **[PostgreSQL](https://www.postgresql.org/)**: Um poderoso banco de dados relacional de código aberto.
+    * **[TypeORM](https://typeorm.io/)**: Um ORM (Object-Relational Mapper) para TypeScript e JavaScript.
+* **Autenticação e Segurança**:
+    * **[JWT](https://jwt.io/)**: Para criação de tokens de acesso seguros.
+    * **[Bcrypt.js](https://github.com/dcodeIO/bcrypt.js)**: Para hashing de senhas.
+* **Upload de Arquivos**:
+    * **[@vercel/blob](https://vercel.com/docs/storage/blob)**: Para armazenamento de arquivos na nuvem da Vercel (configurável).
+* **Deploy**:
+    * Configurado para deploy na **[Vercel](https://vercel.com/)**.
+
+## ⚙️ Configuração do Ambiente
+
+### Pré-requisitos
+
+* [Node.js](https://nodejs.org/en/) (v18 ou superior)
+* [pnpm](https://pnpm.io/) (ou npm/yarn)
+* Uma instância do PostgreSQL rodando.
+
+### Instalação
+
+1.  Clone o repositório:
+    ```bash
+    git clone [https://github.com/cristianomends/achados-ufc-api.git](https://github.com/cristianomends/achados-ufc-api.git)
+    cd achados-ufc-api
+    ```
+
+2.  Instale as dependências:
+    ```bash
+    pnpm install
+    ```
+
+3.  Crie um arquivo `.env` na raiz do projeto, baseado no arquivo `.env.example` (se houver) e preencha as variáveis de ambiente:
+    ```env
+
+    NODE_ENV="Production"
+    
+    # URL de conexão com o banco de dados
+    DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+    # Segredo para o JWT
+    JWT_SECRET="SEU_SEGREDO_AQUI"
+
+    # Credenciais do Google para o login social
+    GOOGLE_CLIENT_ID="SEU_CLIENT_ID_DO_GOOGLE"
+
+    # Estratégia de Upload ('local' ou 'vercel')
+    UPLOAD_STRATEGY="local"
+
+    #chave de acesso do vercel blob
+    BLOB_READ_WRITE_TOKEN=vercel_blob_hash_id
+    ```
+
+### Rodando a Aplicação
 
 ```bash
-$ npm install
-```
+# Modo de desenvolvimento (com watch)
+pnpm run start:dev
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Modo de produção
+pnpm run start:prod
